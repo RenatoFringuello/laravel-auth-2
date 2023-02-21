@@ -130,11 +130,12 @@ class ProjectController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Project  $project
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Project  $project)
+    public function destroy($id)
     {
-        //
+        Project::destroy($id);
+        return redirect()->route('admin.projects.index');
     }
 }

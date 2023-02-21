@@ -23,7 +23,7 @@
                         <div class="btn-container">
                             <a href="{{route('admin.projects.show', $project)}}" class="text-decoration-none btn btn-primary">Show</a>
                             <a href="{{route('admin.projects.edit', $project)}}" class="text-decoration-none btn btn-warning">Edit</a>
-                            <a href="{{route('admin.projects.show', $project)}}" class="text-decoration-none btn btn-danger">Delete</a>
+                            @include('layouts.partials.form', ['method' => 'DELETE', 'route' => 'admin.projects.destroy', 'project' => $project, 'extraClasses' => 'btn p-0'])
                         </div>
                     </td>
                 </tr>
