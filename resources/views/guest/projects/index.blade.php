@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', count($projects). ' projects | RF')
+
 @section('content')
     {{-- homepage --}}
     <div class="row g-3">

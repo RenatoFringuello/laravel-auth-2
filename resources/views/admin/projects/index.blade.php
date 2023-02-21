@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', "Manage projects | RF")
+
 @section('content')
     {{-- homepage --}}
     <table class="table">

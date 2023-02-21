@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', "Project $project->title | RF")
+
 @section('content')
         <div class="col-12 col-md-8 mt-5 mx-auto text-decoration-none text-black">
             <div class="card p-2">
