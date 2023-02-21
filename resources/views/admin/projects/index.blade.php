@@ -9,7 +9,7 @@
                 <th class="text-center">Author</th>
                 <th class="text-center">Start Date</th>
                 <th class="text-center">End Date</th>
-                <th class="text-center"><a class="text-decoration-none btn btn-primary" href="#">Add Project</a></th>
+                <th class="text-center"><a class="text-decoration-none btn btn-primary" href="{{route('admin.projects.create')}}">Add Project</a></th>
             </tr>
         </thead>
         <tbody>

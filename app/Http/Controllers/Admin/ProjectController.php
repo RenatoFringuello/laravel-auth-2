@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use GuzzleHttp\Handler\Proxy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -22,8 +23,8 @@ class ProjectController extends Controller
             'author_name' => 'required|max:100',
             'author_lastname' => 'required|max:100',
             'content' => 'required',
-            'start_date' => 'required|date',
-            'end_date' => 'date|nullable',
+            'start_date' => 'required|date|after:1990-12-20 00:00:00',
+            'end_date' => 'date|nullable|after:start_date',
         ];
         $validationMessages = [
             'title.required' => 'Il titolo è un campo obbligatorio',
@@ -35,7 +36,9 @@ class ProjectController extends Controller
             'content.required' => 'Il contenuto del progetto è un campo obbligatorio',
             'start_date.required' => 'La data di inizio è un campo obbligatorio',
             'start_date.date' => 'La data di inizio che hai scritto non esiste in nessun calendario neanche in quello dei maya',
+            'start_date.after' => 'Non puoi aver iniziato a creare un sito prima della sua invenzione',
             'end_date.date' => 'La data di fine che hai scritto non esiste. Lascia il campo vuoto se il lavoro non è finito',
+            'end_date.after' => 'Il progetto non può finire ancor prima che inizi',
         ];
         return $request->validate($validation, $validationMessages);
     }
@@ -51,7 +54,7 @@ class ProjectController extends Controller
 
         return view('admin.projects.index', compact('projects'));
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -59,7 +62,8 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        $project = new Project();
+        return view('admin.projects.create', compact('project'));
     }
 
     /**
@@ -70,7 +74,19 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $this->getValidatedData($request);
+        $data['slug'] = Str::slug($data['title']);
+        // dd($data);
+        $project = new Project();
+        $project->slug = $data['slug'];
+        $project->title = $data['title'];
+        $project->author_name = $data['author_name'];
+        $project->author_lastname = $data['author_lastname'];
+        $project->content = $data['content'];
+        $project->start_date = $data['start_date'];
+        $project->end_date = $data['end_date'];
+        $project->save();
+        return redirect()->route('admin.projects.show', $project);
     }
 
     /**
