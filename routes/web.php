@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\ProjectsController;
 */
 
 Route::get('/', [ProjectsController::class, 'index']);
+Route::resource('project',ProjectsController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
