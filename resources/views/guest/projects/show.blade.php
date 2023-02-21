@@ -8,9 +8,6 @@
                 <p>{{$project->content}}</p>
                 <div>{{ $project->start_date->format('Y-m-d') }}</div>
                 <div class="mb-2 text-success {{ $project->end_date ?? 'text-danger' }}">{{ isset($project->end_date) ? $project->end_date->format('Y-m-d'): 'work in progress' }}</div>
-                <div class="btn-container">
-                    <a href="{{route('project.edit', $project)}}" class="btn btn-primary">EDIT</a>
-                </div>
             </div>
         </div>
     </div>

@@ -18,7 +18,7 @@ use App\Http\Controllers\Guest\ProjectController as GuestProjectController;
 */
 
 Route::get('/', [GuestProjectController::class, 'index']);
-// Route::resource('guest/project', GuestProjectController::class);
+Route::get('/projects/{project}', [GuestProjectController::class, 'show'])->name('guest.projects.show');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
 ->middleware(['auth', 'verified']);
@@ -27,7 +27,7 @@ Route::middleware(['auth', 'verified'])
 ->name('admin.')
 ->prefix('admin')
 ->group(function (){
-    Route::resource('/project', AdminProjectController::class);
+    Route::resource('/projects', AdminProjectController::class);
 });
 
 Route::middleware('auth')->group(function () {

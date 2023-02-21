@@ -21,9 +21,9 @@
                     <td class="text-success {{ $project->end_date ?? 'text-danger' }}">{{ isset($project->end_date) ? $project->end_date->format('Y-m-d'): 'work in progress' }}</td>
                     <td>
                         <div class="btn-container">
-                            <a href="{{route('admin.project.show', $project)}}" class="text-decoration-none btn btn-primary">Show</a>
-                            <a href="{{route('admin.project.edit', $project)}}" class="text-decoration-none btn btn-warning">Edit</a>
-                            <a href="{{route('admin.project.show', $project)}}" class="text-decoration-none btn btn-danger">Delete</a>
+                            <a href="{{route('admin.projects.show', $project)}}" class="text-decoration-none btn btn-primary">Show</a>
+                            <a href="{{route('admin.projects.edit', $project)}}" class="text-decoration-none btn btn-warning">Edit</a>
+                            <a href="{{route('admin.projects.show', $project)}}" class="text-decoration-none btn btn-danger">Delete</a>
                         </div>
                     </td>
                 </tr>
