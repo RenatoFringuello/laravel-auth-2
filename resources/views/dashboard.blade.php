@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', "Welcome back, $user->name | RF")
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -14,7 +16,12 @@
                     </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    <p>
+                        {{ __("Welcome back $user->name") }}
+                    </p>
+                    <div>
+                        <a href="{{route('admin.projects.index')}}" class="btn btn-primary">Let's get started</a>
+                    </div>
                 </div>
             </div>
         </div>
