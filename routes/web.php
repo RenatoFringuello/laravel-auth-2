@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\ProjectsController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
+use App\Http\Controllers\Guest\ProjectController as GuestProjectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,17 +17,24 @@ use App\Http\Controllers\Admin\ProjectsController;
 |
 */
 
-Route::get('/', [ProjectsController::class, 'index']);
-Route::resource('project',ProjectsController::class);
+Route::get('/', [GuestProjectController::class, 'index']);
+// Route::resource('guest/project', GuestProjectController::class);
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])
+->middleware(['auth', 'verified']);
+
+Route::middleware(['auth', 'verified'])
+->name('admin.')
+->prefix('admin')
+->group(function (){
+    Route::resource('/project', AdminProjectController::class);
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
 
 require __DIR__.'/auth.php';

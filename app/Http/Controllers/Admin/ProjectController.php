@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Project;
 use Illuminate\Http\Request;
 
-class ProjectsController extends Controller
+class ProjectController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +17,7 @@ class ProjectsController extends Controller
     {
         $projects = Project::all();
 
-        return view('project.index', compact('projects'));
+        return view('admin.project.index', compact('projects'));
     }
 
     /**
@@ -49,7 +49,7 @@ class ProjectsController extends Controller
      */
     public function show(Project $project)
     {
-        return view('project.show', compact('project'));
+        return view('admin.project.show', compact('project'));
     }
 
     /**
@@ -60,17 +60,17 @@ class ProjectsController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('project.edit', compact('project'));
+        return view('admin.project.edit', compact('project'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Project  $project)
     {
         //
     }
@@ -78,10 +78,10 @@ class ProjectsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Project  $project)
     {
         //
     }
