@@ -43,6 +43,7 @@ class ProjectController extends Controller
         return $request->validate($validation, $validationMessages);
     }
 
+
     /**
      * Display a listing of the resource.
      *
@@ -51,14 +52,17 @@ class ProjectController extends Controller
      */
     public function index(Request $request)
     {
+        //get the oppsite of dir passed by get
+        $dir = !$request->dir;
+        //get the order by field
         $orderBy = $request->sort;
+        //manage author
         $orderBy = ($orderBy == 'author') ? 'author_lastname' : $orderBy;
-        // dd($request->sort);
-        $projects = Project::orderBy($orderBy ?? 'id', 'ASC')->paginate(20)->withQueryString();
+        $projects = Project::orderBy($orderBy ?? 'id', ($dir) ? 'ASC' : 'DESC')->paginate(20)->withQueryString();
 
         $fields = ['Title', 'Author', 'Start Date', 'End Date'];
 
-        return view('admin.projects.index',  compact('projects', 'fields', 'orderBy'));
+        return view('admin.projects.index',  compact('projects', 'fields', 'orderBy', 'dir'));
     }
     
     /**
