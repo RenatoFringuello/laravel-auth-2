@@ -26,7 +26,7 @@
     <div id="app">
         @include('layouts.partials.header')
 
-        <main class="py-3 container-fluid">
+        <main class="py-3 container-md">
             @yield('content')
         </main>
 
