@@ -4,5 +4,5 @@
 
 @section('content')
     {{-- fai il form --}}
-    @include('layouts.partials.form', ['method' => 'PUT', 'route' => 'admin.projects.update', 'project' => $project])
+    @include('layouts.partials.form', ['method' => 'PUT', 'route' => 'admin.projects.update', 'orderBy' => null, 'project' => $project])
 @endsection
