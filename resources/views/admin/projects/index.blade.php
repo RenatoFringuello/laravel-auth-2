@@ -13,7 +13,7 @@
             <tr class="align-middle">
                 {{-- show all the links --}}
                 @foreach ($fields as $field)
-                    <th class="text-center"><a class="text-white" href="{{route('admin.projects.index', Str::slug($field,'_'))}}">{{$field}}</a></th>
+                    <th class="text-center"><a class="text-white" href="{{route('admin.projects.index', ['sort' => Str::slug($field,'_')])}}">{{$field}}</a></th>
                 @endforeach
                 <th class="text-center">
                     <a class="text-decoration-none btn btn-primary border-white" href="{{route('admin.projects.create')}}">
@@ -38,7 +38,7 @@
                             <a href="{{route('admin.projects.edit', $project)}}" class="text-decoration-none btn btn-warning">
                                 <i class="fa-solid fa-pen"></i>
                             </a>
-                            @include('layouts.partials.form', ['method' => 'DELETE', 'route' => 'admin.projects.destroy', 'project' => $project, 'extraClasses' => 'btn p-0'])
+                            @include('layouts.partials.form', ['method' => 'DELETE', 'route' => 'admin.projects.destroy', 'orderBy' => $orderBy ?? 'id','project' => $project, 'extraClasses' => 'btn p-0'])
                         </div>
                     </td>
                 </tr>
