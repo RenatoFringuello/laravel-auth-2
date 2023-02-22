@@ -46,13 +46,18 @@ class ProjectController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  string $field
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $projects = Project::all();
+        $orderBy = $request->server('QUERY_STRING');
+        $orderBy = ($orderBy == 'author') ? 'author_lastname' : $orderBy;
+        // dd($orderBy);
+        $projects = Project::orderBy($orderBy ?? 'id', 'ASC')->paginate(20);
+        $fields = ['Title', 'Author', 'Start Date', 'End Date'];
 
-        return view('admin.projects.index', compact('projects'));
+        return view('admin.projects.index',  compact('projects', 'fields'));
     }
     
     /**
@@ -133,9 +138,15 @@ class ProjectController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
         Project::destroy($id);
-        return redirect()->route('admin.projects.index');
+        /**
+         *  get the full url of the form when delete is clicked and extract the get request after the '?' 
+         * (if doesn't exist is null, on delete click at admin/projects/{id} for example)
+         */
+        $orderBy = explode("?", $request->server('HTTP_REFERER'));//it's an array
+        // dd($orderBy);
+        return redirect()->route('admin.projects.index', $orderBy[1] ?? 'id');
     }
 }

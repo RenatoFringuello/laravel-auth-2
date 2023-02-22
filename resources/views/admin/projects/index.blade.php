@@ -4,21 +4,26 @@
 
 @section('content')
     {{-- homepage --}}
-    <table class="table">
-        <thead class="bg-dark text-white">
+    {{-- pagination --}}
+    {{ $projects->links() }}
+    
+    {{-- table --}}
+    <table class="table table-striped">
+        <thead class="bg-primary text-white">
             <tr class="align-middle">
-                <th class="text-center">Title</th>
-                <th class="text-center">Author</th>
-                <th class="text-center">Start Date</th>
-                <th class="text-center">End Date</th>
+                {{-- show all the links --}}
+                @foreach ($fields as $field)
+                    <th class="text-center"><a class="text-white" href="{{route('admin.projects.index', Str::slug($field,'_'))}}">{{$field}}</a></th>
+                @endforeach
                 <th class="text-center">
-                    <a class="text-decoration-none btn btn-primary" href="{{route('admin.projects.create')}}">
+                    <a class="text-decoration-none btn btn-primary border-white" href="{{route('admin.projects.create')}}">
                         <i class="fa-solid fa-square-plus"></i> Add Project 
                     </a>
                 </th>
             </tr>
         </thead>
         <tbody>
+            {{-- show every project in project table --}}
             @foreach ($projects as $project)
                 <tr class="align-middle">
                     <td class="text-center">{{ $project->title }}</td>
@@ -37,7 +42,10 @@
                         </div>
                     </td>
                 </tr>
-            @endforeach   
+            @endforeach  
         </tbody>
     </table>
+
+    {{-- pagination --}}
+    {{ $projects->links() }}
 @endsection
