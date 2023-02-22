@@ -49,3 +49,7 @@
     {{-- pagination --}}
     {{ $projects->links() }}
 @endsection
+
+@section('scripts')
+    <script type='module' src="{{Vite::asset('./resources/js/popUp.js')}}"></script>
+@endsection
