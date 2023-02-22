@@ -41,5 +41,8 @@
         </div>
     @endif
 
-    <button class="btn {{($method != 'DELETE')? 'btn-primary':'btn-danger'}}" type="submit">{{($method != 'DELETE') ? 'SEND' : 'Delete'}}</button>
+    <button class="btn {{($method != 'DELETE')? 'btn-primary':'btn-danger'}}" type="submit">
+        {{($method != 'DELETE') ? 'Send ' : ''}}
+        <i class="fa-solid {{($method != 'DELETE') ? 'fa-paper-plane' : 'fa-trash'}}"></i>
+    </button>
 </form>

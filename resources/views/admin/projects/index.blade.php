@@ -23,8 +23,12 @@
                     <td class="text-center text-success {{ $project->end_date ?? 'text-danger' }}">{{ isset($project->end_date) ? $project->end_date->format('Y-m-d'): 'work in progress' }}</td>
                     <td class="text-center">
                         <div class="btn-container">
-                            <a href="{{route('admin.projects.show', $project)}}" class="text-decoration-none btn btn-primary">Show</a>
-                            <a href="{{route('admin.projects.edit', $project)}}" class="text-decoration-none btn btn-warning">Edit</a>
+                            <a href="{{route('admin.projects.show', $project)}}" class="text-decoration-none btn btn-primary">
+                                <i class="fa-solid fa-eye"></i>
+                            </a>
+                            <a href="{{route('admin.projects.edit', $project)}}" class="text-decoration-none btn btn-warning">
+                                <i class="fa-solid fa-pen"></i>
+                            </a>
                             @include('layouts.partials.form', ['method' => 'DELETE', 'route' => 'admin.projects.destroy', 'project' => $project, 'extraClasses' => 'btn p-0'])
                         </div>
                     </td>
