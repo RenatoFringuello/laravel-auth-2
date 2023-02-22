@@ -8,7 +8,13 @@ export default defineConfig({
     plugins: [
         laravel({
             // edit the first value of the array input to point to our new sass files and folder.
-            input: ['resources/scss/app.scss', 'resources/js/app.js'],
+            input: [
+                // scss
+                'resources/scss/app.scss', 
+                // scripts
+                'resources/js/app.js',
+                'resources/js/popUp.js',
+            ],
             refresh: true,
         }),
     ],
@@ -16,6 +22,7 @@ export default defineConfig({
     resolve: {
         alias: {
             '~bootstrap': path.resolve(__dirname, 'node_modules/bootstrap'),
+            '~sweetalert2': path.resolve(__dirname, 'node_modules/sweetalert2'),
             '~resources': '/resources/'
         }
     }
