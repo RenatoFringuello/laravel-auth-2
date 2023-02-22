@@ -22,6 +22,7 @@ export default defineConfig({
     resolve: {
         alias: {
             '~bootstrap': path.resolve(__dirname, 'node_modules/bootstrap'),
+            // '~fontawesome': path.resolve(__dirname, 'node_modules/@fortawesome/fontawesome'),
             '~sweetalert2': path.resolve(__dirname, 'node_modules/sweetalert2'),
             '~resources': '/resources/'
         }
