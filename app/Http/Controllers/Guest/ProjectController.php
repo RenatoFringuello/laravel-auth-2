@@ -15,7 +15,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::all();
+        $projects = Project::paginate(24);//24 è divisibile per 2 per 3 e per 4 (nota le classi col-x col-b-x inserite)
 
         return view('guest.projects.index', compact('projects'));
     }
