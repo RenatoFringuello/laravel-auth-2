@@ -18,9 +18,12 @@ class ProjectsSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
+        $projectsInDb = Project::all(['title'])->toArray();
         for ($i=0; $i<30; $i++) {
             $proj = new Project();
-            $proj->title = $faker->unique()->realTextBetween(4, 20);
+            do{
+                $proj->title = $faker->unique()->realTextBetween(4, 20);
+            }while(in_array(['title' => $proj->title], $projectsInDb));
             $proj->slug = Str::of($proj->title)->slug('-');
             $proj->author_name = $faker->firstName();
             $proj->author_lastname = $faker->lastName();
