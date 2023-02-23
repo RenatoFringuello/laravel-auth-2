@@ -16,12 +16,14 @@ use App\Http\Controllers\Guest\ProjectController as GuestProjectController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', [GuestProjectController::class, 'index']);
-Route::get('/projects/{project}', [GuestProjectController::class, 'show'])->name('guest.projects.show');
-
 Route::get('/dashboard', [DashboardController::class, 'index'])
 ->middleware(['auth', 'verified']);
+
+Route::get('/', [GuestProjectController::class, 'index']);
+Route::name('guest.')
+->group(function (){
+    Route::resource('/projects', GuestProjectController::class);
+});
 
 Route::middleware(['auth', 'verified'])
 ->name('admin.')

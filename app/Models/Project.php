@@ -12,5 +12,8 @@ class Project extends Model
     protected $fillable = ['title', 'author_name', 'author_lastname', 'content', 'start_date', 'end_date', 'slug'];
     protected $dates = ['start_date','end_date'];
 
-    
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }
