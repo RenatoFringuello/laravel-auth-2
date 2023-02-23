@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', "Welcome back, $user->name | RF")
+@section('title', "Welcome back, ". Auth::user()->name." | RF")
 
 @section('content')
 <div class="container">
@@ -17,7 +17,7 @@
                     @endif
 
                     <p>
-                        {{ __("Welcome back $user->name") }}
+                        {{ __("Welcome back ". Auth::user()->name ) }}
                     </p>
                     <div>
                         <a href="{{route('admin.projects.index')}}" class="btn btn-primary">Let's get started</a>
